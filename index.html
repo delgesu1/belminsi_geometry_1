@@ -69,6 +69,10 @@
             background-color: var(--burgundy);
         }
 
+        header {
+            z-index: 130; /* Ensure header is above menu overlay */
+        }
+
         .nav-link {
             position: relative;
             display: inline-block;
@@ -2073,7 +2077,7 @@
     <div class="custom-cursor"></div>
     <div class="custom-cursor-follower"></div>
 
-    <header class="fixed w-full z-50 top-0">
+    <header class="fixed w-full top-0">
         <nav class="asymmetric-nav">
             <a href="#home" class="logo hover-link">Ivan Belminsi</a>
             
