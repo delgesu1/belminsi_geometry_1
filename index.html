@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan Belminsi | Classical Cellist</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --charcoal: #1c1c1c;
+            --charcoal-light: #2a2a2a;
+            --burgundy: #750d37;
+            --burgundy-light: #9b1b4d;
+            --gold: #d4af37;
+            --gold-light: #f0d077;
+            --cream: #f8f5f0;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--charcoal);
+            color: var(--cream);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--gold);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        .custom-cursor-follower {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.2s ease-out;
+        }
+
+        .hover-link:hover ~ .custom-cursor {
+            width: 40px;
+            height: 40px;
+            background-color: var(--burgundy);
+        }
+
+        .nav-link {
+            position: relative;
+            display: inline-block;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cream);
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            margin: 0 1rem;
+            cursor: none;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .asymmetric-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            mix-blend-mode: difference;
+            transition: all 0.4s ease;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--cream);
+            transition: var(--transition);
+            white-space: nowrap; /* Prevent wrapping to two lines */
+        }
+
+        .logo:hover {
+            color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .menu-btn {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: none;
+            z-index: 120;
+        }
+
+        .menu-btn span {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: var(--cream);
+            transition: var(--transition);
+        }
+
+        .menu-btn span:nth-child(1) {
+            top: 0;
+        }
+
+        .menu-btn span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70%;
+            right: 0;
+        }
+
+        .menu-btn span:nth-child(3) {
+            bottom: 0;
+            width: 50%;
+            right: 0;
+        }
+
+        .menu-btn:hover span {
+            background-color: var(--gold);
+        }
+
+        .menu-btn:hover span:nth-child(2),
+        .menu-btn:hover span:nth-child(3) {
+            width: 100%;
+        }
+
+        .menu-open .menu-btn span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 45%;
+        }
+
+        .menu-open .menu-btn span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-open .menu-btn span:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: 45%;
+            width: 100%;
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -100vw;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(28, 28, 28, 0.98); /* More transparent background */
+            z-index: 110;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); /* Custom easing */
+            transform: translateX(100%);
+            backdrop-filter: blur(10px); /* Modern blur effect */
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .menu-open .menu {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .menu-nav-link {
+            font-size: 2.8rem; /* Reduced further for elegance */
+            margin: 0.9rem 0; /* Tighter spacing */
+            position: relative;
+            display: inline-block;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300; /* Lighter weight */
+            color: var(--cream);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            transition-delay: 0.1s;
+            letter-spacing: 2px; /* More spacing between letters */
+            text-transform: uppercase; /* All caps for fashion look */
+        }
+
+        .menu-open .menu-nav-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation for menu items */
+        .menu-open .menu-nav-link:nth-child(1) { transition-delay: 0.1s; }
+        .menu-open .menu-nav-link:nth-child(2) { transition-delay: 0.15s; }
+        .menu-open .menu-nav-link:nth-child(3) { transition-delay: 0.2s; }
+        .menu-open .menu-nav-link:nth-child(4) { transition-delay: 0.25s; }
+        .menu-open .menu-nav-link:nth-child(5) { transition-delay: 0.3s; }
+        .menu-open .menu-nav-link:nth-child(6) { transition-delay: 0.35s; }
+        .menu-open .menu-nav-link:nth-child(7) { transition-delay: 0.4s; }
+        .menu-open .menu-nav-link:nth-child(8) { transition-delay: 0.45s; }
+
+        .menu-nav-link:hover {
+            color: var(--gold);
+            transform: scale(1.05) translateX(10px); /* More dramatic hover effect */
+        }
+
+        /* Fancy hover line animation */
+        .menu-nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .menu-nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Modern hamburger button */
+        .menu-btn {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: none;
+            z-index: 120;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn span {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: var(--cream);
+            transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .menu-btn span:nth-child(1) {
+            top: 0;
+            transform-origin: left center;
+        }
+
+        .menu-btn span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70%;
+            right: 0;
+            opacity: 1;
+        }
+
+        .menu-btn span:nth-child(3) {
+            bottom: 0;
+            width: 50%;
+            right: 0;
+            transform-origin: left center;
+        }
+
+        .menu-open .menu-btn {
+            transform: rotate(360deg);
+        }
+
+        .menu-open .menu-btn span:nth-child(1) {
+            transform: rotate(45deg);
+            top: -2px;
+            left: 4px;
+            background-color: var(--gold);
+        }
+
+        .menu-open .menu-btn span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .menu-open .menu-btn span:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: -2px;
+            left: 4px;
+            width: 100%;
+            background-color: var(--gold);
+        }
+
+        /* Social icons in mobile menu */
+        .menu-social {
+            display: flex;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            transition-delay: 0.5s;
+        }
+
+        .menu-open .menu-social {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-social a {
+            margin: 0 1rem;
+            color: var(--cream);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .menu-social a:hover {
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            position: relative; /* Add position relative */
+        }
+
+        .hero-image {
+            width: 100%; /* Change from 50% to 100% to cover full width */
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: absolute; /* Position absolute instead of relative */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0; /* Ensure it's behind the text */
+            transform: scale(1.1);
+            transition: transform 2s ease-out;
+        }
+
+        .hero-text {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5%;
+            position: relative;
+            z-index: 2; /* Above the image */
+        }
+        
+        /* Add gradient overlay */
+        .hero-text::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, 
+                rgba(28, 28, 28, 1) 35%, /* Start fading later */
+                rgba(28, 28, 28, 0) 100%); /* Fade completely to transparent at the edge */
+            z-index: -1;
+            pointer-events: none; /* Prevent overlay from blocking text interaction */
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.2s ease forwards 0.5s;
+        }
+
+        .hero-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            color: var(--gold);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.2s ease forwards 0.8s;
+        }
+
+        .hero-text p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.2s ease forwards 1.1s;
+        }
+
+        .hero-text .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.2s ease forwards 1.4s;
+        }
+
+        .hero-text .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .hero-text .btn:hover {
+            color: var(--charcoal);
+        }
+
+        .hero-text .btn:hover:before {
+            left: 0;
+        }
+
+        .vertical-text {
+            position: absolute;
+            left: 20px;
+            bottom: 30px;
+            transform: rotate(-90deg);
+            transform-origin: left bottom;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+
+        .vertical-text:before {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background-color: var(--cream);
+            margin-right: 1rem;
+            opacity: 0.7;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards 1.7s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .scroll-indicator span {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background-color: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--gold);
+            animation: scrollDown 1.5s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        .biography {
+            padding: 10rem 5%;
+            position: relative;
+            background-color: var(--charcoal-light);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 1px;
+            background-color: var(--gold);
+        }
+
+        .biography-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .bio-image {
+            width: 100%;
+            height: 80vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .bio-image:after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--gold);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .bio-image:hover:after {
+            top: 10px;
+            left: -10px;
+        }
+
+        .bio-text {
+            position: relative;
+        }
+
+        .bio-paragraph {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .bio-paragraph.large {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .pull-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-style: italic;
+            line-height: 1.3;
+            color: var(--gold);
+            position: relative;
+            margin: 3rem 0;
+            padding-left: 2rem;
+        }
+
+        .pull-quote:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background-color: var(--gold);
+        }
+
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-style: italic;
+            color: var(--gold);
+            margin-top: 3rem;
+        }
+
+        .performances {
+            padding: 10rem 5%;
+            background-color: var(--charcoal);
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 5rem;
+            padding-left: 2rem;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 100%;
+            background-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 5rem;
+            transform: perspective(1000px) rotateX(0);
+            transition: transform 0.5s;
+        }
+
+        .timeline-item:hover {
+            transform: perspective(1000px) rotateX(2deg);
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            background-color: var(--charcoal);
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover:before {
+            background-color: var(--gold);
+        }
+
+        .timeline-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-venue {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 80%;
+        }
+
+        .timeline-link {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .timeline-link:after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .timeline-link:hover {
+            color: var(--gold-light);
+        }
+
+        .timeline-link:hover:after {
+            width: 100%;
+        }
+
+        .gallery {
+            padding: 10rem 5% 5rem; /* Reduce bottom padding */
+            background-color: var(--charcoal-light);
+            position: relative;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            grid-gap: 20px;
+            height: 80vh;
+            margin-top: 5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: 1 / 7;
+            grid-row: 1 / 3;
+        }
+
+        .gallery-item:nth-child(2) {
+            grid-column: 7 / 10;
+            grid-row: 1 / 2;
+        }
+
+        .gallery-item:nth-child(3) {
+            grid-column: 10 / 13;
+            grid-row: 1 / 2;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-column: 7 / 13;
+            grid-row: 2 / 3;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(28, 28, 28, 0.8), rgba(28, 28, 28, 0));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.1s;
+        }
+
+        .gallery-item:hover .gallery-title {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.2s;
+        }
+
+        .gallery-item:hover .gallery-desc {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .view-more {
+            display: inline-block;
+            margin-top: 3rem;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .view-more:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .view-more:hover {
+            color: var(--gold-light);
+        }
+
+        .view-more:hover:after {
+            height: 2px;
+        }
+
+        .discography {
+            padding: 10rem 5%;
+            background-color: var(--charcoal);
+            position: relative;
+        }
+
+        .albums {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 5rem;
+        }
+
+        .album {
+            width: 300px;
+            margin: 2rem;
+            position: relative;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .album:hover {
+            transform: translateY(-10px);
+        }
+
+        .album-cover {
+            width: 100%;
+            height: 300px;
+            background-color: var(--burgundy);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album:hover .album-cover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .album-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .album:hover .album-bg {
+            transform: scale(1.1);
+        }
+
+        .album-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(28, 28, 28, 0.3), rgba(28, 28, 28, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .album:hover .album-overlay {
+            opacity: 1;
+        }
+
+        .album-play {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transform: scale(0.8);
+            transition: var(--transition);
+        }
+
+        .album-play:hover {
+            transform: scale(1);
+            background-color: var(--gold-light);
+        }
+
+        .album-play i {
+            font-size: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .album-info {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .album-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .album-year {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--gold);
+        }
+
+        .repertoire {
+            padding: 10rem 5%;
+            background-color: var(--charcoal-light);
+            position: relative;
+        }
+
+        .repertoire-container {
+            margin-top: 5rem;
+        }
+
+        .repertoire-category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .repertoire-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 1.5rem;
+        }
+
+        .repertoire-item {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+            padding: 1.5rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: var(--transition);
+        }
+
+        .repertoire-item:hover {
+            border-color: var(--gold);
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+
+        .repertoire-composer {
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .repertoire-piece {
+            font-style: italic;
+            color: rgba(248, 245, 240, 0.8);
+        }
+
+        .teaching {
+            padding: 10rem 5%;
+            background-color: var(--charcoal);
+            position: relative;
+        }
+
+        .teaching-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 4rem;
+            margin-top: 5rem;
+        }
+
+        .teaching-image {
+            width: 100%;
+            height: 70vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .teaching-text {
+            position: relative;
+        }
+
+        .teaching-text p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin: 3rem 0 1.5rem;
+            color: var(--gold);
+        }
+
+        .philosophy-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .philosophy-item {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .philosophy-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: var(--gold);
+        }
+
+        .classes-info {
+            margin-top: 3rem;
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+
+        .classes-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .classes-details {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .class-item {
+            margin-bottom: 1rem;
+        }
+
+        .class-type {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .press {
+            padding: 10rem 5%;
+            background-color: var(--charcoal-light);
+            position: relative;
+        }
+
+        .reviews {
+            margin-top: 5rem;
+        }
+
+        .review {
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .review-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-style: italic;
+            line-height: 1.4;
+            color: var(--cream);
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-quote:before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        .review-source {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .press-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 5rem;
+        }
+
+        .press-logo {
+            margin: 2rem;
+            opacity: 0.6;
+            transition: var(--transition);
+            filter: grayscale(100%);
+        }
+
+        .press-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        .contact {
+            padding: 10rem 5%;
+            background-color: var(--charcoal);
+            position: relative;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 4rem;
+            margin-top: 5rem;
+        }
+
+        .contact-info {
+            position: relative;
+        }
+
+        .contact-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1.5rem;
+        }
+
+        .contact-icon i {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .contact-info-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .contact-info-text span {
+            display: block;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .social-icons {
+            display: flex;
+            margin-top: 3rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            border-color: var(--gold);
+            background-color: var(--gold);
+        }
+
+        .social-icon i {
+            color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .social-icon:hover i {
+            color: var(--charcoal);
+        }
+
+        .contact-form {
+            position: relative;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(248, 245, 240, 0.3);
+            padding: 0.8rem 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: var(--cream);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 0.8rem;
+            left: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: rgba(248, 245, 240, 0.5);
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus ~ .form-label,
+        .form-control:not(:placeholder-shown) ~ .form-label {
+            top: -20px;
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: none;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border: 1px solid var(--gold);
+            background-color: transparent;
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .submit-btn:hover {
+            color: var(--charcoal);
+        }
+
+        .submit-btn:hover:before {
+            left: 0;
+        }
+
+        .footer {
+            padding: 5rem 5% 2rem;
+            background-color: var(--charcoal-light);
+            position: relative;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(248, 245, 240, 0.1);
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--cream);
+        }
+
+        .footer-nav {
+            display: flex;
+        }
+
+        .footer-nav-link {
+            margin-left: 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--cream);
+            transition: var(--transition);
+        }
+
+        .footer-nav-link:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+        }
+
+        .copyright {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: rgba(248, 245, 240, 0.5);
+        }
+
+        .credits {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: rgba(248, 245, 240, 0.5);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 99;
+            cursor: pointer;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top i {
+            color: var(--charcoal);
+            font-size: 1.2rem;
+        }
+
+        /* Add a full-width background behind particles */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 3; /* Bring particles above hero-text */
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 1200px) {
+            .hero-text h1 {
+                font-size: 4rem;
+            }
+
+            .section-title {
+                font-size: 3.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-rows: auto; /* Let rows size automatically based on content */
+                height: auto;
+                grid-gap: 1rem; /* Ensure consistent gap */
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: 1 / 13;
+                grid-row: 1 / 2;
+            }
+
+            .gallery-item:nth-child(2) {
+                grid-column: 1 / 7;
+                grid-row: 2 / 3;
+            }
+
+            .gallery-item:nth-child(3) {
+                grid-column: 7 / 13;
+                grid-row: 2 / 3;
+            }
+
+            .gallery-item:nth-child(4) {
+                grid-column: 1 / 13;
+                grid-row: 3 / 4;
+            }
+
+            .gallery-item {
+                height: auto; /* Let grid control height */
+            }
+
+            .gallery-image {
+                height: 100%; /* Fill the gallery-item */
+                aspect-ratio: 4 / 3; /* Maintain a consistent aspect ratio */
+                object-fit: cover; /* Ensure image covers the area well */
+            }
+        }
+
+        @media (max-width: 992px) {
+            /* These styles will apply from 981px to 992px */
+            .biography-content, .teaching-content, .contact-content {
+                grid-template-columns: 1fr;
+                grid-gap: 3rem;
+            }
+
+            .bio-image, .teaching-image {
+                height: 60vh;
+            }
+
+            .vertical-text {
+                display: none;
+            }
+
+            .timeline-desc {
+                max-width: 100%;
+            }
+
+            .pull-quote {
+                font-size: 1.8rem;
+            }
+
+            .menu-nav-link {
+                font-size: 3rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-nav {
+                margin-top: 2rem;
+                justify-content: center;
+            }
+
+            .footer-nav-link {
+                margin: 0 1rem;
+            }
+        }
+
+        @media (max-width: 981px) {
+            /* Global mobile styles */
+            body {
+                font-size: 14px;
+            }
+            
+            /* Header styles */
+            .asymmetric-nav {
+                padding: 1.5rem 5%;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            /* Hero section - minimalist approach */
+            .hero {
+                height: 100vh;
+                flex-direction: column;
+            }
+            
+            .hero-image {
+                width: 100%;
+                height: 100vh;
+                position: fixed; /* Create a fixed background effect */
+                top: 0;
+                left: 0;
+                z-index: 0;
+            }
+            
+            .hero-text {
+                width: 100%;
+                height: 100vh;
+                justify-content: flex-end; /* Push content to bottom */
+                padding: 0 8% 15vh 8%;
+                z-index: 1;
+            }
+            
+            .hero-text::after {
+                background: linear-gradient(to top, 
+                    rgba(28, 28, 28, 0.95) 0%,
+                    rgba(28, 28, 28, 0.8) 40%,
+                    rgba(28, 28, 28, 0.4) 70%,
+                    rgba(28, 28, 28, 0) 100%);
+            }
+            
+            .hero-text h1 {
+                font-size: 3.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-text p {
+                display: none; /* Remove paragraph on mobile for cleaner look */
+            }
+            
+            .hero-text .btn {
+                padding: 0.8rem 2rem;
+                margin-top: 1rem;
+            }
+            
+            .vertical-text {
+                display: none;
+            }
+            
+            /* Clean up scroll indicator */
+            .scroll-indicator {
+                bottom: 5vh;
+                right: 50%;
+                transform: translateX(50%);
+            }
+            
+            /* Content sections */
+            .biography, .performances, .gallery, .discography, 
+            .repertoire, .teaching, .press, .contact {
+                padding: 5rem 8% 3rem; /* Reduce bottom padding on mobile */
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            /* Biography section */
+            .biography-content, .teaching-content, .contact-content {
+                grid-template-columns: 1fr;
+                grid-gap: 2rem;
+                margin-top: 2rem;
+            }
+            
+            .bio-image, .teaching-image {
+                height: 50vh;
+            }
+            
+            .bio-image:after {
+                left: -10px;
+                top: 10px;
+            }
+            
+            .bio-paragraph.large {
+                font-size: 1.1rem;
+            }
+            
+            .pull-quote {
+                font-size: 1.5rem;
+                padding-left: 1.5rem;
+                margin: 2rem 0;
+            }
+            
+            /* Performances/Timeline */
+            .timeline {
+                padding-left: 1rem;
+            }
+            
+            .timeline-item {
+                margin-bottom: 3rem;
+            }
+            
+            .timeline-item:before {
+                left: -1rem;
+                width: 10px;
+                height: 10px;
+            }
+            
+            .timeline-title {
+                font-size: 1.5rem;
+            }
+            
+            .timeline-desc {
+                max-width: 100%;
+            }
+            
+            /* Gallery */
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-auto-rows: 40vh;
+                grid-gap: 1rem;
+                height: auto;
+                margin-top: 2rem;
+                padding-bottom: 0; /* Ensure no extra padding */
+            }
+            
+            .gallery-item {
+                height: 40vh;
+                /* margin-bottom: 1rem; Removed margin to test */
+            }
+            
+            /* Discography */
+            .albums {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-gap: 2rem;
+                margin-top: 2rem;
+            }
+            
+            .album {
+                width: 100%;
+                margin: 0;
+            }
+            
+            .album-cover {
+                height: 0;
+                padding-bottom: 100%; /* Maintain aspect ratio */
+            }
+            
+            /* Repertoire */
+            .repertoire-list {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Contact */
+            .contact-form {
+                margin-top: 3rem;
+            }
+            
+            /* Footer */
+            .footer {
+                padding: 3rem 8% 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding-bottom: 2rem;
+            }
+            
+            .footer-logo {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .footer-nav {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .footer-nav-link {
+                margin: 0.5rem 1rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .credits {
+                margin-top: 0.5rem;
+            }
+            
+            /* Mobile menu refinements */
+            .menu-nav-link {
+                font-size: 2.2rem;
+                margin: 0.7rem 0;
+            }
+            
+            .menu-social {
+                margin-top: 2rem;
+            }
+            
+            .menu-close-btn {
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .bio-image, .teaching-image {
+                height: 40vh;
+            }
+            
+            .review-quote {
+                font-size: 1.2rem;
+                padding-left: 1.2rem;
+            }
+            
+            .menu-nav-link {
+                font-size: 1.8rem;
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* RESTORED MEDIA QUERIES */
+        @media (max-width: 768px) {
+            .nav-link {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2.8rem;
+            }
+
+            .timeline-title {
+                font-size: 1.5rem;
+            }
+
+            .review-quote {
+                font-size: 1.5rem;
+            }
+
+            .albums {
+                justify-content: flex-start;
+            }
+
+            .album {
+                width: 250px;
+                margin: 1.5rem;
+            }
+
+            .album-cover {
+                height: 250px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .credits {
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .bio-image, .teaching-image {
+                height: 50vh;
+            }
+
+            .gallery-image {
+                height: 40vh;
+            }
+
+            .album {
+                width: 100%;
+                margin: 1.5rem 0;
+            }
+
+            .album-cover {
+                height: auto;
+                aspect-ratio: 1/1;
+            }
+
+            .timeline-date {
+                font-size: 0.8rem;
+            }
+
+            .timeline-title {
+                font-size: 1.3rem;
+            }
+
+            .review-quote {
+                font-size: 1.3rem;
+                padding-left: 1.5rem;
+            }
+
+            .review-quote:before {
+                font-size: 3rem;
+            }
+
+            .footer-nav {
+                flex-wrap: wrap;
+            }
+
+            .footer-nav-link {
+                margin: 0.5rem 1rem;
+            }
+        }
+
+        /* Print styles for PDF export */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+
+            .custom-cursor, .custom-cursor-follower, .menu-btn, .back-to-top {
+                display: none !important;
+            }
+
+            .hero, .biography, .performances, .gallery, .discography, .repertoire, .teaching, .press, .contact {
+                padding: 3rem 5%;
+                page-break-inside: avoid;
+            }
+
+            .hero {
+                flex-direction: row;
+                height: auto;
+            }
+
+            .gallery-grid {
+                display: flex;
+                flex-wrap: wrap;
+                height: auto;
+            }
+
+            .gallery-item {
+                width: 48%;
+                margin: 1%;
+            }
+
+            .gallery-image {
+                height: 30vh;
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .asymmetric-nav {
+                position: relative;
+                mix-blend-mode: normal;
+            }
+
+            .hero-image, .bio-image, .teaching-image {
+                height: auto;
+                min-height: 40vh;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .section-title:after {
+                background-color: #000;
+            }
+
+            #particles-js {
+                display: none;
+            }
+        }
+
+        /* Add styles for the close button */
+        .menu-close-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: transparent;
+            border: none;
+            color: var(--cream);
+            font-size: 2rem;
+            cursor: none;
+            z-index: 120;
+            transition: var(--transition);
+            opacity: 0;
+            transform: rotate(0deg);
+            transition-delay: 0.5s;
+        }
+
+        .menu-open .menu-close-btn {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+
+        .menu-close-btn:hover {
+            color: var(--gold);
+        }
+
+        /* Styles for scrolled header */
+        .header-scrolled {
+            /* This class now mainly acts as a trigger via JS */
+            /* Remove background, filter, shadow, border from here */
+            transition: all 0.4s ease; /* Keep transition if needed for header itself */
+        }
+
+        .header-scrolled .asymmetric-nav {
+            /* Apply background styles directly to the nav when header is scrolled */
+            background-color: rgba(28, 28, 28, 0.97);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            /* border-bottom: 1px solid rgba(212, 175, 55, 0.1); REMOVED */
+            mix-blend-mode: normal;
+            padding: 1.2rem 5%;
+        }
+
+        .header-scrolled .logo,
+        .header-scrolled .nav-link {
+            color: var(--cream);
+        }
+
+        .header-scrolled .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .header-scrolled .menu-btn span {
+            background-color: var(--cream);
+        }
+
+        .header-scrolled .menu-btn:hover span {
+            background-color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
+    <header class="fixed w-full z-50 top-0">
+        <nav class="asymmetric-nav">
+            <a href="#home" class="logo hover-link">Ivan Belminsi</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden xl:flex items-center" id="main-nav">
+                <a href="#biography" class="nav-link hover-link">About</a>
+                <a href="#performances" class="nav-link hover-link">Events</a>
+                <a href="#gallery" class="nav-link hover-link">Media</a>
+                <a href="#discography" class="nav-link hover-link">Recordings</a>
+                <a href="#repertoire" class="nav-link hover-link">Repertoire</a>
+                <a href="#teaching" class="nav-link hover-link">Teaching</a>
+                <a href="#press" class="nav-link hover-link">Press</a>
+                <a href="#contact" class="nav-link hover-link">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="menu-btn xl:hidden" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="menu">
+        <!-- Close button X -->
+        <button class="menu-close-btn hover-link" aria-label="Close Menu">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <a href="#biography" class="menu-nav-link hover-link">About</a>
+        <a href="#performances" class="menu-nav-link hover-link">Events</a>
+        <a href="#gallery" class="menu-nav-link hover-link">Media</a>
+        <a href="#discography" class="menu-nav-link hover-link">Recordings</a>
+        <a href="#repertoire" class="menu-nav-link hover-link">Repertoire</a>
+        <a href="#teaching" class="menu-nav-link hover-link">Teaching</a>
+        <a href="#press" class="menu-nav-link hover-link">Press</a>
+        <a href="#contact" class="menu-nav-link hover-link">Contact</a>
+        
+        <!-- Social Media Icons -->
+        <div class="menu-social">
+            <a href="#" class="hover-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="hover-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover-link"><i class="fab fa-spotify"></i></a>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-text">
+            <div class="hero-content">
+                <h2>Classical Cellist</h2>
+                <h1>Ivan Belminsi</h1>
+                <p>Renowned for his extraordinary depth of musicianship and technical mastery, Ivan Belminsi has established himself as one of the most compelling cellists of his generation, captivating audiences worldwide with his profound interpretations.</p>
+                <a href="#contact" class="btn hover-link">Book Now</a>
+            </div>
+            <div class="vertical-text">Scroll to discover</div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+        <div class="hero-image" style="background-image: url('assets/images/hero2.jpg');"></div>
+    </section>
+
+    <section id="biography" class="biography">
+        <h3 class="section-title" data-aos="fade-up">Biography</h3>
+        <div class="biography-content">
+            <div class="bio-image" data-aos="fade-right" style="background-image: url('https://gensparkpublicblob.blob.core.windows.net/user-upload-image/v1/base64_upload/8fd9d5ae33e01b89fc94f61ea3e1d097');"></div>
+            <div class="bio-text" data-aos="fade-left">
+                <p class="bio-paragraph large">Ivan Belminsi has firmly established himself as one of the most versatile and captivating cellists of his generation, known for performances that combine technical brilliance with profound emotional depth.</p>
+                <p class="bio-paragraph">Born into a family of musicians, Ivan began his cello studies at the age of six. His exceptional talent was evident from an early age, leading to his acceptance at the prestigious Conservatoire National Supérieur de Musique in Paris, where he studied under renowned cellist Michel Strauss. He later continued his studies at the Juilliard School with the legendary Joel Krosnick.</p>
+                <div class="pull-quote" data-aos="fade-up">
+                    "Music is not just about playing the notes correctly, but about revealing the soul behind them. Each piece has its own story waiting to be told."
+                </div>
+                <p class="bio-paragraph">Ivan's international career was launched after winning the First Prize at the International Paulo Cello Competition. Since then, he has performed with many of the world's leading orchestras, including the Berlin Philharmonic, London Symphony Orchestra, Boston Symphony, and the Orchestre de Paris. His performances at Carnegie Hall, Wigmore Hall, Salle Pleyel, and the Berlin Philharmonie have consistently received critical acclaim.</p>
+                <p class="bio-paragraph">As a dedicated chamber musician, Ivan collaborates regularly with acclaimed artists and ensembles. His versatility extends to his repertoire, which spans from Bach to contemporary works, with a particular emphasis on expanding the cello literature through new commissions.</p>
+                <p class="bio-paragraph">Ivan plays a rare Matteo Goffriller cello, made in Venice in 1705, kindly on loan from a private foundation.</p>
+                <div class="signature">Ivan Belminsi</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="performances" class="performances">
+        <h3 class="section-title" data-aos="fade-up">Upcoming Performances</h3>
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="timeline-date">September 15-17, 2023</div>
+                <h4 class="timeline-title">Bach Cello Suites (Complete)</h4>
+                <div class="timeline-venue">Carnegie Hall, New York</div>
+                <p class="timeline-desc">A three-night journey through Bach's complete cello suites, performed in the intimate setting of Zankel Hall. Ivan will present two suites each evening, paired with contemporary works inspired by Bach.</p>
+                <a href="#" class="timeline-link hover-link">Get Tickets</a>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="timeline-date">October 5, 2023</div>
+                <h4 class="timeline-title">Elgar Cello Concerto</h4>
+                <div class="timeline-venue">Royal Festival Hall, London</div>
+                <p class="timeline-desc">Performance with the London Philharmonic Orchestra under the baton of Vladimir Jurowski. The program also includes Shostakovich's Symphony No. 10.</p>
+                <a href="#" class="timeline-link hover-link">Get Tickets</a>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="timeline-date">November 18-20, 2023</div>
+                <h4 class="timeline-title">Dvořák Cello Concerto</h4>
+                <div class="timeline-venue">Symphony Center, Chicago</div>
+                <p class="timeline-desc">Three performances with the Chicago Symphony Orchestra conducted by Riccardo Muti, featuring Dvořák's beloved Cello Concerto in B minor.</p>
+                <a href="#" class="timeline-link hover-link">Get Tickets</a>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="timeline-date">January 12, 2024</div>
+                <h4 class="timeline-title">Chamber Music with Friends</h4>
+                <div class="timeline-venue">Wigmore Hall, London</div>
+                <p class="timeline-desc">An evening of chamber music featuring works by Beethoven, Schubert, and a world premiere by composer Thomas Adès, written specifically for this occasion.</p>
+                <a href="#" class="timeline-link hover-link">Get Tickets</a>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="timeline-date">March 5-15, 2024</div>
+                <h4 class="timeline-title">Asian Tour</h4>
+                <div class="timeline-venue">Tokyo, Seoul, Hong Kong, Singapore</div>
+                <p class="timeline-desc">A series of recitals and concerto performances across major Asian venues, featuring works by Bach, Beethoven, and contemporary Asian composers.</p>
+                <a href="#" class="timeline-link hover-link">Get Tickets</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h3 class="section-title" data-aos="fade-up">Gallery</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-aos="fade-up">
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/v1/base64_upload/b7f93e1803aa8000d8f1710137365165" alt="Ivan Belminsi performing" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h4 class="gallery-title">Studio Session</h4>
+                    <p class="gallery-desc">Recording session for Bach's Cello Suites</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/v1/base64_upload/221396feb71adfcf1f10bbea4ad88559" alt="Close-up of cello" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h4 class="gallery-title">The Instrument</h4>
+                    <p class="gallery-desc">Ivan's 1705 Matteo Goffriller cello</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/v1/base64_upload/718633a4e643d87cb86ec049780afaa7" alt="Home studio rehearsal" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h4 class="gallery-title">Practice Session</h4>
+                    <p class="gallery-desc">Private rehearsal at Ivan's studio</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/v1/base64_upload/78d1fd25558e9e387fdef61009c86733" alt="Concert performance" class="gallery-image">
+                <div class="gallery-overlay">
+                    <h4 class="gallery-title">Baroque Performance</h4>
+                    <p class="gallery-desc">Concert at St. Martin's Cathedral</p>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="view-more hover-link" data-aos="fade-up">View Complete Gallery</a>
+    </section>
+
+    <section id="discography" class="discography">
+        <h3 class="section-title" data-aos="fade-up">Discography</h3>
+        <div class="albums">
+            <div class="album" data-aos="fade-up">
+                <div class="album-cover">
+                    <div class="album-overlay">
+                        <div class="album-play hover-link">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="album-bg" style="background-color: #750d37;"></div>
+                </div>
+                <div class="album-info">
+                    <h4 class="album-title">Bach: Six Cello Suites</h4>
+                    <div class="album-year">2021</div>
+                </div>
+            </div>
+            <div class="album" data-aos="fade-up" data-aos-delay="100">
+                <div class="album-cover">
+                    <div class="album-overlay">
+                        <div class="album-play hover-link">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="album-bg" style="background-color: #2a2a2a;"></div>
+                </div>
+                <div class="album-info">
+                    <h4 class="album-title">Dvořák & Elgar: Cello Concertos</h4>
+                    <div class="album-year">2019</div>
+                </div>
+            </div>
+            <div class="album" data-aos="fade-up" data-aos-delay="200">
+                <div class="album-cover">
+                    <div class="album-overlay">
+                        <div class="album-play hover-link">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="album-bg" style="background-color: #9b1b4d;"></div>
+                </div>
+                <div class="album-info">
+                    <h4 class="album-title">Schumann: Complete Works for Cello</h4>
+                    <div class="album-year">2018</div>
+                </div>
+            </div>
+            <div class="album" data-aos="fade-up" data-aos-delay="300">
+                <div class="album-cover">
+                    <div class="album-overlay">
+                        <div class="album-play hover-link">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="album-bg" style="background-color: #d4af37;"></div>
+                </div>
+                <div class="album-info">
+                    <h4 class="album-title">Russian Masterpieces</h4>
+                    <div class="album-year">2016</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="repertoire" class="repertoire">
+        <h3 class="section-title" data-aos="fade-up">Repertoire</h3>
+        <div class="repertoire-container">
+            <div class="repertoire-category" data-aos="fade-up">
+                <h4 class="category-title">Concertos</h4>
+                <div class="repertoire-list">
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Antonín Dvořák</div>
+                        <div class="repertoire-piece">Cello Concerto in B minor, Op. 104</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Edward Elgar</div>
+                        <div class="repertoire-piece">Cello Concerto in E minor, Op. 85</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Robert Schumann</div>
+                        <div class="repertoire-piece">Cello Concerto in A minor, Op. 129</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Joseph Haydn</div>
+                        <div class="repertoire-piece">Cello Concerto No. 1 in C major, Hob. VIIb:1</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Joseph Haydn</div>
+                        <div class="repertoire-piece">Cello Concerto No. 2 in D major, Hob. VIIb:2</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Dmitri Shostakovich</div>
+                        <div class="repertoire-piece">Cello Concerto No. 1 in E-flat major, Op. 107</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="repertoire-category" data-aos="fade-up">
+                <h4 class="category-title">Solo Works</h4>
+                <div class="repertoire-list">
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Johann Sebastian Bach</div>
+                        <div class="repertoire-piece">Six Suites for Unaccompanied Cello, BWV 1007-1012</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Zoltán Kodály</div>
+                        <div class="repertoire-piece">Sonata for Solo Cello, Op. 8</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Benjamin Britten</div>
+                        <div class="repertoire-piece">Three Suites for Cello, Op. 72, 80, & 87</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Gaspar Cassadó</div>
+                        <div class="repertoire-piece">Suite for Solo Cello</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="repertoire-category" data-aos="fade-up">
+                <h4 class="category-title">Chamber Music</h4>
+                <div class="repertoire-list">
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Ludwig van Beethoven</div>
+                        <div class="repertoire-piece">Complete Sonatas for Piano and Cello</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Johannes Brahms</div>
+                        <div class="repertoire-piece">Sonatas for Cello and Piano, Op. 38 & 99</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Claude Debussy</div>
+                        <div class="repertoire-piece">Sonata for Cello and Piano in D minor</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Felix Mendelssohn</div>
+                        <div class="repertoire-piece">Sonata for Cello and Piano No. 2 in D major, Op. 58</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="repertoire-category" data-aos="fade-up">
+                <h4 class="category-title">Contemporary Works</h4>
+                <div class="repertoire-list">
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Kaija Saariaho</div>
+                        <div class="repertoire-piece">Sept Papillons for Solo Cello</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Henri Dutilleux</div>
+                        <div class="repertoire-piece">Trois Strophes sur le nom de Sacher</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Thomas Adès</div>
+                        <div class="repertoire-piece">Lieux retrouvés</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">György Ligeti</div>
+                        <div class="repertoire-piece">Sonata for Solo Cello</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="teaching" class="teaching">
+        <h3 class="section-title" data-aos="fade-up">Teaching Studio</h3>
+        <div class="teaching-content">
+            <div class="teaching-image" data-aos="fade-right" style="background-image: url('https://gensparkpublicblob.blob.core.windows.net/user-upload-image/v1/base64_upload/718633a4e643d87cb86ec049780afaa7');"></div>
+            <div class="teaching-text" data-aos="fade-left">
+                <p>Ivan Belminsi maintains a select teaching studio, working with advanced students and young professional cellists. His teaching philosophy combines rigorous technical foundation with profound musical understanding and historical context.</p>
+                <p>Drawing from his own diverse training and performing experiences, Ivan helps students develop their unique artistic voice while addressing the technical aspects essential for artistic freedom.</p>
+                
+                <h4 class="philosophy-title">Teaching Philosophy</h4>
+                <ul class="philosophy-list">
+                    <li class="philosophy-item">Technical mastery should serve musical expression, not exist for its own sake.</li>
+                    <li class="philosophy-item">Understanding the historical and compositional context of each work is essential for meaningful interpretation.</li>
+                    <li class="philosophy-item">Each student possesses unique qualities that should be nurtured and developed rather than forced into a predetermined mold.</li>
+                    <li class="philosophy-item">The development of critical listening skills and self-assessment is crucial for continued growth beyond formal education.</li>
+                    <li class="philosophy-item">Chamber music and collaborative skills are as important as solo playing abilities.</li>
+                </ul>
+                
+                <div class="classes-info">
+                    <h5 class="classes-title">Available Teaching Options</h5>
+                    <div class="classes-details">
+                        <div class="class-item">
+                            <div class="class-type">Private Lessons</div>
+                            Available for advanced students and professionals by audition
+                        </div>
+                        <div class="class-item">
+                            <div class="class-type">Masterclasses</div>
+                            Offered at conservatories and music festivals worldwide
+                        </div>
+                        <div class="class-item">
+                            <div class="class-type">Summer Intensive Program</div>
+                            Annual two-week program for gifted young cellists
+                        </div>
+                        <div class="class-item">
+                            <div class="class-type">Online Consultations</div>
+                            Available for students unable to attend in person
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="press" class="press">
+        <h3 class="section-title" data-aos="fade-up">Press & Reviews</h3>
+        <div class="reviews">
+            <div class="review" data-aos="fade-up">
+                <div class="review-quote">Belminsi's approach to Bach's Cello Suites reveals a profound understanding of both historical performance practice and contemporary sensibilities. His interpretation is refreshingly free of mannerism, allowing the music to speak with uncommon directness and emotional power.</div>
+                <div class="review-source">The New York Times</div>
+            </div>
+            <div class="review" data-aos="fade-up">
+                <div class="review-quote">The Dvořák Concerto received a reading of remarkable insight and technical assurance. Belminsi's rich, warm tone filled the hall, and his dialogue with the orchestra was natural and flowing, as if participants in an intimate conversation.</div>
+                <div class="review-source">The Guardian</div>
+            </div>
+            <div class="review" data-aos="fade-up">
+                <div class="review-quote">What sets Belminsi apart is not merely his flawless technique, but his ability to communicate the emotional essence of each piece. His performance of Shostakovich's First Cello Concerto was nothing short of revelatory, bringing out layers of meaning that often remain hidden.</div>
+                <div class="review-source">Gramophone Magazine</div>
+            </div>
+        </div>
+        <div class="press-features">
+            <img src="https://via.placeholder.com/150x80/333333/FFFFFF/?text=BBC" alt="BBC" class="press-logo" data-aos="fade-up">
+            <img src="https://via.placeholder.com/150x80/333333/FFFFFF/?text=Forbes" alt="Forbes" class="press-logo" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://via.placeholder.com/150x80/333333/FFFFFF/?text=Classic+FM" alt="Classic FM" class="press-logo" data-aos="fade-up" data-aos-delay="200">
+            <img src="https://via.placeholder.com/150x80/333333/FFFFFF/?text=Strad" alt="The Strad" class="press-logo" data-aos="fade-up" data-aos-delay="300">
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h3 class="section-title" data-aos="fade-up">Contact</h3>
+        <div class="contact-content">
+            <div class="contact-info" data-aos="fade-right">
+                <p class="contact-text">For bookings, press inquiries, or teaching opportunities, please use the contact form or reach out directly using the information below.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <span>Management Office</span>
+                            35 Music Square, New York, NY 10023
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <span>Email</span>
+                            contact@ivanbelminsi.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-info-text">
+                            <span>Phone</span>
+                            +1 (212) 555-7890
+                        </div>
+                    </div>
+                </div>
+                <div class="social-icons">
+                    <a href="#" class="social-icon hover-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon hover-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon hover-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon hover-link">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="contact-form" data-aos="fade-left">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder=" ">
+                        <label for="name" class="form-label">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder=" ">
+                        <label for="email" class="form-label">Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="subject" placeholder=" ">
+                        <label for="subject" class="form-label">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="message" placeholder=" "></textarea>
+                        <label for="message" class="form-label">Your Message</label>
+                    </div>
+                    <button type="submit" class="submit-btn hover-link">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ivan Belminsi</div>
+            <div class="footer-nav">
+                <a href="#biography" class="footer-nav-link hover-link">About</a>
+                <a href="#performances" class="footer-nav-link hover-link">Events</a>
+                <a href="#gallery" class="footer-nav-link hover-link">Media</a>
+                <a href="#discography" class="footer-nav-link hover-link">Recordings</a>
+                <a href="#contact" class="footer-nav-link hover-link">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">© 2023 Ivan Belminsi. All rights reserved.</div>
+            <div class="credits">Website by Designer Studio</div>
+        </div>
+    </footer>
+
+    <div class="back-to-top hover-link">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/ScrollTrigger.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorFollower = document.querySelector('.custom-cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Menu toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const menu = document.querySelector('.menu');
+        const mainNav = document.getElementById('main-nav'); // Get the main nav container
+        const body = document.body;
+        const menuLinks = document.querySelectorAll('.menu-nav-link'); // Select all menu links
+
+        menuBtn.addEventListener('click', () => {
+            body.classList.toggle('menu-open');
+        });
+
+        // Close menu when a link is clicked
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                body.classList.remove('menu-open');
+            });
+        });
+
+        // Particles.js
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 50,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#d4af37"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#d4af37",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true,
+            offset: 100,
+        });
+
+        // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll to sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations with GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to('.hero-image', {
+            scrollTrigger: {
+                trigger: '.hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+            },
+            scale: 1,
+            ease: 'none'
+        });
+
+        // Album hover sound effect
+        const albumPlays = document.querySelectorAll('.album-play');
+        albumPlays.forEach(play => {
+            play.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Would typically play audio here
+                console.log('Playing album preview');
+            });
+        });
+
+        // Form animations
+        const formControls = document.querySelectorAll('.form-control');
+        formControls.forEach(control => {
+            control.addEventListener('focus', () => {
+                control.parentElement.classList.add('focused');
+            });
+            control.addEventListener('blur', () => {
+                control.parentElement.classList.remove('focused');
+            });
+        });
+
+        // Prevent default form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Would typically handle form submission here
+            console.log('Form submitted');
+        });
+
+        // Add event listener for the new close button
+        const menuCloseBtn = document.querySelector('.menu-close-btn');
+
+        menuCloseBtn.addEventListener('click', () => {
+            body.classList.remove('menu-open');
+        });
+    </script>
+</body>
+</html>
