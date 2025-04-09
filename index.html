@@ -1831,11 +1831,6 @@
             .menu-social {
                 margin-top: 2rem;
             }
-            
-            .menu-close-btn {
-                top: 1.5rem;
-                right: 1.5rem;
-            }
         }
         
         /* Extra small devices */
@@ -2025,32 +2020,6 @@
             }
         }
 
-        /* Add styles for the close button */
-        .menu-close-btn {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: transparent;
-            border: none;
-            color: var(--cream);
-            font-size: 2rem;
-            cursor: none;
-            z-index: 120;
-            transition: var(--transition);
-            opacity: 0;
-            transform: rotate(0deg);
-            transition-delay: 0.5s;
-        }
-
-        .menu-open .menu-close-btn {
-            opacity: 1;
-            transform: rotate(90deg);
-        }
-
-        .menu-close-btn:hover {
-            color: var(--gold);
-        }
-
         /* Styles for scrolled header */
         .header-scrolled {
             /* This class now mainly acts as a trigger via JS */
@@ -2131,10 +2100,11 @@
 
     <!-- Mobile Menu -->
     <div class="menu">
-        <!-- Close button X -->
+        <!-- DELETE Close button X 
         <button class="menu-close-btn hover-link" aria-label="Close Menu">
             <i class="fas fa-times"></i>
         </button>
+        -->
         
         <a href="#biography" class="menu-nav-link hover-link">About</a>
         <a href="#performances" class="menu-nav-link hover-link">Events</a>
@@ -2154,7 +2124,7 @@
         </div>
     </div>
 
-    <section class="hero">
+    <section id="home" class="hero">
         <div id="particles-js"></div>
         <div class="hero-text">
             <div class="hero-content">
@@ -2831,12 +2801,7 @@
             console.log('Form submitted');
         });
 
-        // Add event listener for the new close button
-        const menuCloseBtn = document.querySelector('.menu-close-btn');
-
-        menuCloseBtn.addEventListener('click', () => {
-            body.classList.remove('menu-open');
-        });
+        // Event listener for the close button was here, REMOVE IT
     </script>
 </body>
 </html>
