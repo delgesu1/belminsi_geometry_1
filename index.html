@@ -2085,6 +2085,19 @@
         .header-scrolled .menu-btn:hover span {
             background-color: var(--gold);
         }
+
+        /* Hide custom cursor on mobile devices */
+        @media (max-width: 768px) {
+            .custom-cursor,
+            .custom-cursor-follower {
+                display: none !important;
+            }
+            
+            /* Restore default cursor */
+            body {
+                cursor: auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2147,10 +2160,10 @@
             <div class="hero-content">
                 <h2>Classical Cellist</h2>
                 <h1>Ivan Belminsi</h1>
-                <p>Renowned for his extraordinary depth of musicianship and technical mastery, Ivan Belminsi has established himself as one of the most compelling cellists of his generation, captivating audiences worldwide with his profound interpretations.</p>
-                <a href="#contact" class="btn hover-link">Book Now</a>
+                <p>
+                    Renowned for his extraordinary depth of musicianship and technical mastery, Ivan Belminsi has established himself as one of the most compelling cellists of his generation, captivating audiences worldwide with his profound interpretations.
+                </p>
             </div>
-            <div class="vertical-text">Scroll to discover</div>
             <div class="scroll-indicator">
                 <span>Scroll</span>
                 <div class="scroll-line"></div>
