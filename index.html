@@ -953,7 +953,9 @@
         .album-bg {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            /* object-fit: cover; Removed as it's for img tags */
+            background-size: cover; /* Ensure image covers the area */
+            background-position: center; /* Center the image */
             transition: transform 0.5s ease;
         }
 
@@ -1033,21 +1035,53 @@
         }
 
         .repertoire-category {
-            margin-bottom: 4rem;
+            margin-bottom: 1rem; /* Reduce margin between categories */
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .category-header:hover {
+            background-color: rgba(212, 175, 55, 0.05);
         }
 
         .category-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2rem; /* Slightly reduce size */
             font-weight: 400;
             color: var(--gold);
-            margin-bottom: 2rem;
+            margin-bottom: 0; /* Remove bottom margin */
+        }
+
+        .category-toggle-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .repertoire-category.open .category-toggle-icon {
+            transform: rotate(180deg);
         }
 
         .repertoire-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            grid-gap: 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 1rem; /* Add padding when open */
+            background-color: rgba(212, 175, 55, 0.02);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .repertoire-category.open .repertoire-list {
+            max-height: 1000px; /* Set a large max-height for expansion */
+            padding: 1.5rem 1rem; /* Restore padding when open */
         }
 
         .repertoire-item {
@@ -1055,14 +1089,24 @@
             font-size: 0.95rem;
             font-weight: 300;
             line-height: 1.6;
-            padding: 1.5rem;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.8rem 0; /* Adjust padding */
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
             transition: var(--transition);
         }
 
+        .repertoire-item:last-child {
+            border-bottom: none; /* Remove border from last item */
+        }
+
+        /* Remove grid styles if they exist */
+        .repertoire-list {
+            /* display: grid; */
+            /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+            /* grid-gap: 1.5rem; */
+        }
+
         .repertoire-item:hover {
-            border-color: var(--gold);
-            background-color: rgba(212, 175, 55, 0.05);
+            background-color: transparent; /* Keep background consistent */
         }
 
         .repertoire-composer {
@@ -1784,7 +1828,36 @@
             
             /* Repertoire */
             .repertoire-list {
-                grid-template-columns: 1fr;
+                /* display: grid; */ /* Remove grid layout */
+                /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+                /* grid-gap: 1.5rem; */
+            }
+            
+            .repertoire-item {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.95rem;
+                font-weight: 300;
+                line-height: 1.6;
+                padding: 0.8rem 0; /* Adjust padding for list format */
+                /* border: 1px solid rgba(212, 175, 55, 0.3); Remove border */
+                border-bottom: 1px solid rgba(212, 175, 55, 0.1); /* Add bottom border for separation */
+                transition: var(--transition);
+            }
+            
+            .repertoire-item:hover {
+                /* border-color: var(--gold); Remove hover border effect */
+                background-color: rgba(212, 175, 55, 0.05);
+            }
+            
+            .repertoire-composer {
+                font-weight: 500;
+                color: var(--cream);
+                margin-bottom: 0.5rem;
+            }
+            
+            .repertoire-piece {
+                font-style: italic;
+                color: rgba(248, 245, 240, 0.8);
             }
             
             /* Contact */
@@ -2148,7 +2221,7 @@
     </section>
 
     <section id="biography" class="biography">
-        <h3 class="section-title" data-aos="fade-up">Biography</h3>
+        <h3 class="section-title" data-aos="fade-up">About</h3>
         <div class="biography-content">
             <div class="bio-image" data-aos="fade-right" style="background-image: url('https://gensparkpublicblob.blob.core.windows.net/user-upload-image/v1/base64_upload/8fd9d5ae33e01b89fc94f61ea3e1d097');"></div>
             <div class="bio-text" data-aos="fade-left">
@@ -2166,7 +2239,7 @@
     </section>
 
     <section id="performances" class="performances">
-        <h3 class="section-title" data-aos="fade-up">Upcoming Performances</h3>
+        <h3 class="section-title" data-aos="fade-up">Events</h3>
         <div class="timeline">
             <div class="timeline-item" data-aos="fade-up">
                 <div class="timeline-date">September 15-17, 2023</div>
@@ -2207,7 +2280,7 @@
     </section>
 
     <section id="gallery" class="gallery">
-        <h3 class="section-title" data-aos="fade-up">Gallery</h3>
+        <h3 class="section-title" data-aos="fade-up">Media</h3>
         <div class="gallery-grid">
             <div class="gallery-item" data-aos="fade-up">
                 <img src="https://gensparkpublicblob.blob.core.windows.net/user-upload-image/v1/base64_upload/b7f93e1803aa8000d8f1710137365165" alt="Ivan Belminsi performing" class="gallery-image">
@@ -2242,7 +2315,7 @@
     </section>
 
     <section id="discography" class="discography">
-        <h3 class="section-title" data-aos="fade-up">Discography</h3>
+        <h3 class="section-title" data-aos="fade-up">Recordings</h3>
         <div class="albums">
             <div class="album" data-aos="fade-up">
                 <div class="album-cover">
@@ -2251,7 +2324,7 @@
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
-                    <div class="album-bg" style="background-color: #750d37;"></div>
+                    <div class="album-bg" style="background-image: url('images/Bach Cello Suites.jpg');"></div>
                 </div>
                 <div class="album-info">
                     <h4 class="album-title">Bach: Six Cello Suites</h4>
@@ -2265,7 +2338,7 @@
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
-                    <div class="album-bg" style="background-color: #2a2a2a;"></div>
+                    <div class="album-bg" style="background-image: url('images/Dvorak Elgar.jpg');"></div>
                 </div>
                 <div class="album-info">
                     <h4 class="album-title">Dvořák & Elgar: Cello Concertos</h4>
@@ -2279,7 +2352,7 @@
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
-                    <div class="album-bg" style="background-color: #9b1b4d;"></div>
+                    <div class="album-bg" style="background-image: url('images/Schumann.jpg');"></div>
                 </div>
                 <div class="album-info">
                     <h4 class="album-title">Schumann: Complete Works for Cello</h4>
@@ -2293,7 +2366,7 @@
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
-                    <div class="album-bg" style="background-color: #d4af37;"></div>
+                    <div class="album-bg" style="background-image: url('images/Russian.jpg');"></div>
                 </div>
                 <div class="album-info">
                     <h4 class="album-title">Russian Masterpieces</h4>
@@ -2307,7 +2380,10 @@
         <h3 class="section-title" data-aos="fade-up">Repertoire</h3>
         <div class="repertoire-container">
             <div class="repertoire-category" data-aos="fade-up">
-                <h4 class="category-title">Concertos</h4>
+                <div class="category-header">
+                    <h4 class="category-title">Concertos</h4>
+                    <i class="fas fa-chevron-down category-toggle-icon"></i>
+                </div>
                 <div class="repertoire-list">
                     <div class="repertoire-item">
                         <div class="repertoire-composer">Antonín Dvořák</div>
@@ -2333,11 +2409,26 @@
                         <div class="repertoire-composer">Dmitri Shostakovich</div>
                         <div class="repertoire-piece">Cello Concerto No. 1 in E-flat major, Op. 107</div>
                     </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Camille Saint-Saëns</div>
+                        <div class="repertoire-piece">Cello Concerto No. 1 in A minor, Op. 33</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Pyotr Ilyich Tchaikovsky</div>
+                        <div class="repertoire-piece">Variations on a Rococo Theme, Op. 33</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">William Walton</div>
+                        <div class="repertoire-piece">Cello Concerto</div>
+                    </div>
                 </div>
             </div>
 
             <div class="repertoire-category" data-aos="fade-up">
-                <h4 class="category-title">Solo Works</h4>
+                <div class="category-header">
+                    <h4 class="category-title">Solo Works</h4>
+                    <i class="fas fa-chevron-down category-toggle-icon"></i>
+                </div>
                 <div class="repertoire-list">
                     <div class="repertoire-item">
                         <div class="repertoire-composer">Johann Sebastian Bach</div>
@@ -2355,11 +2446,26 @@
                         <div class="repertoire-composer">Gaspar Cassadó</div>
                         <div class="repertoire-piece">Suite for Solo Cello</div>
                     </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Max Reger</div>
+                        <div class="repertoire-piece">Three Suites for Solo Cello, Op. 131c</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Paul Hindemith</div>
+                        <div class="repertoire-piece">Sonata for Solo Cello, Op. 25 No. 3</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">George Crumb</div>
+                        <div class="repertoire-piece">Sonata for Solo Cello</div>
+                    </div>
                 </div>
             </div>
 
             <div class="repertoire-category" data-aos="fade-up">
-                <h4 class="category-title">Chamber Music</h4>
+                <div class="category-header">
+                    <h4 class="category-title">Chamber Music</h4>
+                    <i class="fas fa-chevron-down category-toggle-icon"></i>
+                </div>
                 <div class="repertoire-list">
                     <div class="repertoire-item">
                         <div class="repertoire-composer">Ludwig van Beethoven</div>
@@ -2377,11 +2483,30 @@
                         <div class="repertoire-composer">Felix Mendelssohn</div>
                         <div class="repertoire-piece">Sonata for Cello and Piano No. 2 in D major, Op. 58</div>
                     </div>
+                     <div class="repertoire-item">
+                        <div class="repertoire-composer">Frédéric Chopin</div>
+                        <div class="repertoire-piece">Sonata for Cello and Piano in G minor, Op. 65</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Sergei Rachmaninoff</div>
+                        <div class="repertoire-piece">Sonata for Cello and Piano in G minor, Op. 19</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Franz Schubert</div>
+                        <div class="repertoire-piece">Sonata in A minor 'Arpeggione', D. 821</div>
+                    </div>
+                     <div class="repertoire-item">
+                        <div class="repertoire-composer">Dmitri Shostakovich</div>
+                        <div class="repertoire-piece">Sonata for Cello and Piano in D minor, Op. 40</div>
+                    </div>
                 </div>
             </div>
 
             <div class="repertoire-category" data-aos="fade-up">
-                <h4 class="category-title">Contemporary Works</h4>
+                <div class="category-header">
+                    <h4 class="category-title">Contemporary Works</h4>
+                    <i class="fas fa-chevron-down category-toggle-icon"></i>
+                </div>
                 <div class="repertoire-list">
                     <div class="repertoire-item">
                         <div class="repertoire-composer">Kaija Saariaho</div>
@@ -2398,6 +2523,22 @@
                     <div class="repertoire-item">
                         <div class="repertoire-composer">György Ligeti</div>
                         <div class="repertoire-piece">Sonata for Solo Cello</div>
+                    </div>
+                    <div class="repertoire-item">
+                        <div class="repertoire-composer">Sofia Gubaidulina</div>
+                        <div class="repertoire-piece">The Canticle of the Sun</div>
+                    </div>
+                     <div class="repertoire-item">
+                        <div class="repertoire-composer">Witold Lutosławski</div>
+                        <div class="repertoire-piece">Cello Concerto</div>
+                    </div>
+                     <div class="repertoire-item">
+                        <div class="repertoire-composer">Krzysztof Penderecki</div>
+                        <div class="repertoire-piece">Concerto per violoncello ed orchestra No. 2</div>
+                    </div>
+                     <div class="repertoire-item">
+                        <div class="repertoire-composer">John Tavener</div>
+                        <div class="repertoire-piece">The Protecting Veil</div>
                     </div>
                 </div>
             </div>
@@ -2807,6 +2948,24 @@
         });
 
         // Event listener for the close button was here, REMOVE IT
+
+        // Repertoire Accordion
+        const categoryHeaders = document.querySelectorAll('.category-header');
+
+        categoryHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const category = header.parentElement;
+                category.classList.toggle('open');
+
+                // Optional: Close other categories when one is opened (accordion behavior)
+                // categoryHeaders.forEach(otherHeader => {
+                //     if (otherHeader !== header) {
+                //         otherHeader.parentElement.classList.remove('open');
+                //     }
+                // });
+            });
+        });
+
     </script>
 </body>
 </html>
